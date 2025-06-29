@@ -13,4 +13,9 @@ export const readContacts = async () => {
   }
 };
 
-readContacts();
+const main = async () => {
+  const contacts = await readContacts();
+  console.log(contacts);
+};
+
+main();

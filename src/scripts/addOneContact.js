@@ -5,16 +5,16 @@ import { writeContacts } from '../utils/writeContacts.js';
 
 export const addOneContact = async () => {
   try {
-    const newContact = faker.helpers.multiple(createFakeContact, {
-      count: 1,
-    });
+    const newContact = createFakeContact();
     console.log('new:', newContact);
+
     const existingContacts = await readContacts();
-    existingContacts.push(...newContact);
-    await writeContacts(existingContacts);
-    return existingContacts;
+    const updatedContacts = [...existingContacts, newContact];
+
+    await writeContacts(updatedContacts);
+    console.log(`🎉 Successfully added 1 contact.`);
   } catch (err) {
-    console.log(err);
+    console.error('❌ Error adding contact:', err.message);
   }
 };
 

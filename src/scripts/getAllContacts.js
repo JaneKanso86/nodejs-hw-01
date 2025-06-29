@@ -9,4 +9,9 @@ export const getAllContacts = async () => {
   }
 };
 
-console.log(await getAllContacts());
+const main = async () => {
+  const contacts = await getAllContacts();
+  console.log(contacts);
+};
+
+main();

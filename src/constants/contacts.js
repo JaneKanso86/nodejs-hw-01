@@ -1,3 +1,7 @@
-export const PATH_DB = new URL('../db/db.json', import.meta.url).pathname;
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
 
-console.log(PATH_DB);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export const PATH_DB = resolve(__dirname, '../db/db.json');

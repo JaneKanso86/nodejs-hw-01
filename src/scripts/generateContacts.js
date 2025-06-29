@@ -3,19 +3,20 @@ import { createFakeContact } from '../utils/createFakeContact.js';
 import { readContacts } from '../utils/readContacts.js';
 import { writeContacts } from '../utils/writeContacts.js';
 
-export const generateContacts = async (number) => {
+const generateContacts = async (amount = 5) => {
   try {
     const newContact = faker.helpers.multiple(createFakeContact, {
-      count: number,
+      count: amount,
     });
     console.log('new:', newContact);
     const existingContacts = await readContacts();
-    existingContacts.push(...newContact);
-    await writeContacts(existingContacts);
-    return existingContacts;
+    const updatedContacts = [...existingContacts, ...newContact];
+
+    await writeContacts(updatedContacts);
+    console.log(`🎉 Successfully added ${amount} contacts.`);
   } catch (err) {
-    console.log(err);
+    console.error('❌ Error in generateContacts:', err.message);
   }
 };
 
-generateContacts(5);
+generateContacts();
